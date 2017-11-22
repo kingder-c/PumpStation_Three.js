@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Roulette</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        canvas { width: 100%; height: 100% }
+    </style>
+    <script type="text/javascript" src="js/three.js"></script>
+    <script type="text/javascript" src="js/ColladaLoader.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/pumpStation1.js"></script>
+    <script src="js/jquery.js"></script>
+</head>
+<body onload="startGame();">
+    <div id="threeModelDiv" style="width:980px;height:490px"></div>
+    <button onclick='changePump(1,"open")'>开启1</button>
+    <button onclick='changePump(2,"close")'>关闭2</button>
+    <button onclick='changePump(3,"fault")'>故障3</button>
+    <!--<div style="position:absolute;top:317px;left:795px;background-color:gray;opacity: 0.8;">
+        <h3>水泵运行状态</h3>
+        <span>开启</span><label style="background-color:rgb(0, 255, 0);">&nbsp&nbsp&nbsp&nbsp&nbsp</label>&nbsp
+        <span>关闭</span><label style="background-color:rgb(0, 0, 0);">&nbsp&nbsp&nbsp&nbsp&nbsp</label>&nbsp
+        <span>故障</span><label style="background-color:rgb(255, 0, 0);">&nbsp&nbsp&nbsp&nbsp&nbsp</label>&nbsp<br>
+        <span>压&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp力:</span>&nbsp&nbsp&nbsp<label id="">0.19Mpa</label><br>
+        <span>流&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp量:</span>&nbsp&nbsp&nbsp<label id="">75立方米/秒</label><br>
+        <span>蓄水池水位:</span>&nbsp&nbsp&nbsp<label id="" >2.08米</label><br>
+        <span>水源井水位:</span>&nbsp&nbsp&nbsp<label id="">0米</label>-->
+    </div>
+</body>
+</html>
