@@ -30,9 +30,21 @@ function initthree() {
     $('#threeModelDiv').html(html);
     //$("canvas").css("width", "100%");
 
+    
+    var axisHelper = new THREE.AxisHelper(500);
+    scene.add(axisHelper);
+
+}
+
+function initlight() {
+    var light = new THREE.DirectionalLight(0xffffee, 2);
+    var light1 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.4);
+    light.position.set(-100, -100, 300);
+    //scene.add(light);
+    scene.add(light1);
     var spotLight = new THREE.SpotLight(0xffffdd);
-    spotLight.position.set(100, 100, 100);
-    spotLight.intensity = 0.8;
+    spotLight.position.set(50, 50, 50);
+    spotLight.intensity = 1.2;
     spotLight.castShadow = true;
 
     spotLight.shadow.mapSize.width = 1024;
@@ -43,122 +55,18 @@ function initthree() {
     spotLight.shadow.camera.fov = 30;
 
     scene.add(spotLight);
-
-}
-
-function initlight() {
-    var light = new THREE.DirectionalLight(0xffffee, 2);
-    var light1 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.2);
-    light.position.set(-100, -100, 300);
-    scene.add(light);
-    scene.add(light1);
+    lightHelper2 = new THREE.SpotLightHelper(spotLight);
+    scene.add(lightHelper2);
 }
 
 function LoadModel() {
-    //var loader = new THREE.ColladaLoader();
-    //loader.load("model/泵站.dae", function (collada) {
-    //    daeModel = collada.scene;
-    //    daeModel.scale.set(0.09, 0.09, 0.07);
-    //    daeModel.position.set(-10, 0, -2);
-    //    scene.add(daeModel);
-    //    ////�ο�������
-    //    //var axisHelper = new THREE.AxisHelper(500);
-    //    //scene.add(axisHelper);
-    //    //NProgress.done();
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    //var loader1 = new THREE.ColladaLoader();
-    //loader1.load("model/仪表.dae", function (collada) {
-    //    daeModel0 = collada.scene;
-    //    daeModel0.scale.set(2, 2, 2);
-    //    daeModel0.position.set(150, 0, -50);
-    //    scene.add(daeModel0);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    ////一号水泵
-    //var loader2 = new THREE.ColladaLoader();
-    //loader2.load("model/水泵.dae", function (collada) {
-    //    daeModel1 = collada.scene;
-    //    daeModel1.scale.set(0.3, 0.3, 0.3);
-    //    daeModel1.position.set(80, 13.7, 0);
-    //    daeModel1.rotation.z = 0.5 * Math.PI;
-    //    //daeModel1.rotation(0,0,1)
-    //    scene.add(daeModel1);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    ////二号水泵
-    //var loader3 = new THREE.ColladaLoader();
-    //loader3.load("model/水泵.dae", function (collada) {
-    //    daeModel2 = collada.scene;
-    //    daeModel2.scale.set(0.3, 0.3, 0.3);
-    //    daeModel2.position.set(80, 24.7, 0);
-    //    daeModel2.rotation.z = 0.5 * Math.PI;
-    //    scene.add(daeModel2);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    ////三号水泵
-    //var loader4 = new THREE.ColladaLoader();
-    //loader4.load("model/水泵.dae", function (collada) {
-    //    daeModel3 = collada.scene;
-    //    daeModel3.scale.set(0.3, 0.3, 0.3);
-    //    daeModel3.position.set(80, 36.7, 0);
-    //    daeModel3.rotation.z = 0.5 * Math.PI;
-    //    scene.add(daeModel3);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    ////四号水泵
-    //var loader5 = new THREE.ColladaLoader();
-    //loader5.load("model/水泵.dae", function (collada) {
-    //    daeModel4 = collada.scene;
-    //    daeModel4.scale.set(0.3, 0.3, 0.3);
-    //    daeModel4.position.set(80, 48.7, 0);
-    //    daeModel4.rotation.z = 0.5 * Math.PI;
-    //    scene.add(daeModel4);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    ////五号水泵
-    //var loader6 = new THREE.ColladaLoader();
-    //loader6.load("model/水泵.dae", function (collada) {
-    //    daeModel5 = collada.scene;
-    //    daeModel5.scale.set(0.3, 0.3, 0.3);
-    //    daeModel5.position.set(80, 64.2, 0);
-    //    daeModel5.rotation.z = 0.5 * Math.PI;
-    //    scene.add(daeModel5);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
-    ////6号水泵
-    //var loader7 = new THREE.ColladaLoader();
-    //loader7.load("model/水泵.dae", function (collada) {
-    //    daeModel6 = collada.scene;
-    //    daeModel6.scale.set(0.3, 0.3, 0.3);
-    //    daeModel6.position.set(80, 80.7, 0);
-    //    daeModel6.rotation.z = 0.5 * Math.PI;
-    //    scene.add(daeModel6);
-    //},
-    //    function (xhr) {
-    //        console.log((xhr.loaded / xhr.total * 100) + "% loaded");
-    //    });
         //泵站
     var loader7 = new THREE.ColladaLoader();
     loader7.load("model/maxdae/Pump.dae", function (collada) {
         daeModel6 = collada.scene;
         daeModel6.scale.set(0.3, 0.3, 0.3);
-        daeModel6.position.set(80, 80.7, 0);
-        daeModel6.rotation.z = 0.5 * Math.PI;
+        //daeModel6.position.set(80, 80.7, 0);
+        daeModel6.rotation.x = 0.5 * Math.PI;
         scene.add(daeModel6);
     },
         function (xhr) {
@@ -195,7 +103,6 @@ function startGame() {
     LoadMax();
     render();
     initControls();
-    camera.lookAt(new THREE.Vector3(66.5, 36.7, 0));
     /*$("#threeModelDiv").append("<label style='position:absolute;top:83px;left:566px;background-color:gray;border-color: white;border-style: groove;'><font color='#0000ff'>状态:正常</label> </button>");
     $("#threeModelDiv").append("<label style='position:absolute;top:138px;left:569px;background-color:gray;border-color: white;border-style: groove;'><font color='#0000ff'>状态:正常</label> </button>") ;
     $("#threeModelDiv").append("<label style='position:absolute;top:183px;left:572px;background-color:gray;border-color: white;border-style: groove;'><font color='#0000ff'>状态:正常</label> </button>") ;
