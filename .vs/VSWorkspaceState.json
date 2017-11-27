@@ -1,5 +1,6 @@
 {
   "ExpandedNodes": [
+<<<<<<< HEAD
     "",
     "\\js",
     "\\model",
@@ -7,5 +8,10 @@
     "\\model\\maxdae"
   ],
   "SelectedNode": "\\demo.html",
+=======
+    ""
+  ],
+  "SelectedNode": "\\pumpStation1.html",
+>>>>>>> ebb48082226564d6fe5ac7281253d017125b04a2
   "PreviewInSolutionExplorer": false
 }
