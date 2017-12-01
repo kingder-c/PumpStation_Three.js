@@ -1,17 +1,8 @@
 {
   "ExpandedNodes": [
-<<<<<<< HEAD
     "",
-    "\\js",
-    "\\model",
-    "\\model\\3DMAX",
-    "\\model\\maxdae"
+    "\\js"
   ],
-  "SelectedNode": "\\demo.html",
-=======
-    ""
-  ],
-  "SelectedNode": "\\pumpStation1.html",
->>>>>>> ebb48082226564d6fe5ac7281253d017125b04a2
+  "SelectedNode": "\\js\\pumpStation1.js",
   "PreviewInSolutionExplorer": false
 }

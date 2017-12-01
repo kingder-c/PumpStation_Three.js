@@ -62,7 +62,7 @@ function initlight() {
 function LoadModel() {
         //泵站
     var loader7 = new THREE.ColladaLoader();
-    loader7.load("model/maxdae/Pump.dae", function (collada) {
+    loader7.load("model/maxdae/Pumpstation.DAE", function (collada) {
         daeModel6 = collada.scene;
         daeModel6.scale.set(0.3, 0.3, 0.3);
         //daeModel6.position.set(80, 80.7, 0);
