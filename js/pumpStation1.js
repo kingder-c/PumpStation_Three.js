@@ -23,6 +23,7 @@ function initcamera() {
 }
 function initthree() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
+    render.shadowMapEnabled = true;//允许阴影映射，渲染阴影需要大量的资源，因此我们需要告诉渲染器我们需要阴影
     renderer.setSize(980, 490);
     renderer.setClearColor(0x000000);
     //document.body.appendChild(renderer.domElement);
@@ -38,22 +39,20 @@ function initthree() {
 
 function initlight() {
     var light = new THREE.DirectionalLight(0xffffee, 2);
-    var light1 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.4);
+    var light1 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3);
     light.position.set(-100, -100, 300);
-    //scene.add(light);
+    scene.add(light);
     scene.add(light1);
-    var spotLight = new THREE.SpotLight(0xffffdd);
-    spotLight.position.set(50, 50, 50);
-    spotLight.intensity = 1.2;
-    spotLight.castShadow = true;
 
+    var spotLight = new THREE.SpotLight(0xffffdd);
+    spotLight.position.set(500, 500, 500);
+    spotLight.intensity = 0.2;
+    spotLight.castShadow = true;
     spotLight.shadow.mapSize.width = 1024;
     spotLight.shadow.mapSize.height = 1024;
-
     spotLight.shadow.camera.near = 500;
     spotLight.shadow.camera.far = 4000;
     spotLight.shadow.camera.fov = 30;
-
     scene.add(spotLight);
     lightHelper2 = new THREE.SpotLightHelper(spotLight);
     scene.add(lightHelper2);
@@ -67,6 +66,9 @@ function LoadModel() {
         daeModel6.scale.set(0.3, 0.3, 0.3);
         //daeModel6.position.set(80, 80.7, 0);
         daeModel6.rotation.x = 0.5 * Math.PI;
+        daeModel6.receiveShadow = true;
+        //daeModel6.castShadow = true;
+        
         scene.add(daeModel6);
     },
         function (xhr) {
