@@ -74,7 +74,6 @@ function initcamera() {
     camera.rotation.z = -0.96;
     //camera.rotation.z = 5/6*Math.PI;
     //camera.rotation.set(0,0,0)
-    obj = camera;
 }
 function initthree() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -93,15 +92,15 @@ function initthree() {
 }
 
 function initlight() {
-    var light = new THREE.DirectionalLight(0xffffee, 2);
-    var light1 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3);
-    light.position.set(-100, -100, 300);
+    var light = new THREE.DirectionalLight(0xffffee, 1);
+    var light1 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.1);
+    light.position.set(100, 100, 100);
     scene.add(light);
     scene.add(light1);
 
     var spotLight = new THREE.SpotLight(0xffffdd);
-    spotLight.position.set(500, 500, 500);
-    spotLight.intensity = 0.2;
+    spotLight.position.set(100, 100, 100);
+    spotLight.intensity = 0.8;
     spotLight.castShadow = true;
     spotLight.shadow.mapSize.width = 1024;
     spotLight.shadow.mapSize.height = 1024;
@@ -135,7 +134,8 @@ function LoadModel() {
         daeModel2.scale.set(0.3, 0.3, 0.3);
         daeModel2.receiveShadow = true;
         daeModel2.castShadow = true;
-
+        daeModel2.position.x = -6;
+        obj = daeModel2;
         scene.add(daeModel2);
     },
         function (xhr) {
@@ -149,7 +149,7 @@ function LoadModel() {
         daeModel3.scale.set(0.3, 0.3, 0.3);
         daeModel3.receiveShadow = true;
         daeModel3.castShadow = true;
-
+        daeModel3.position.x = -12;
         scene.add(daeModel3);
     },
         function (xhr) {
