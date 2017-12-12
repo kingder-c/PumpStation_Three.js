@@ -65,10 +65,24 @@ function LoadModel() {
         daeModel6 = collada.scene;
         daeModel6.scale.set(0.3, 0.3, 0.3);
         //daeModel6.position.set(80, 80.7, 0);
-        daeModel6.rotation.x = 0.5 * Math.PI;
+        //daeModel6.rotation.x = 0.5 * Math.PI;
         daeModel6.receiveShadow = true;
         //daeModel6.castShadow = true;
         
+        scene.add(daeModel6);
+    },
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + "% loaded");
+        });
+    var loader8 = new THREE.ColladaLoader();
+    loader8.load("model/maxdae/water.DAE", function (collada) {
+        daeModel6 = collada.scene;
+        daeModel6.scale.set(0.3, 0.3, 0.3);
+        //daeModel6.position.set(80, 80.7, 0);
+        //daeModel6.rotation.x = 0.5 * Math.PI;
+        daeModel6.receiveShadow = true;
+        //daeModel6.castShadow = true;
+
         scene.add(daeModel6);
     },
         function (xhr) {
