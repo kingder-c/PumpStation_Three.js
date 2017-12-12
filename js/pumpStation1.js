@@ -2,20 +2,54 @@ var scene, camera, renderer, daeModel1, daeModel2, daeModel3,daeModel7, daeModel
 
 
 var Options = function () {
-    this.message = 'dat.gui';
-    this.speed = 0.8;
-    this.displayOutline = false;
-    this.button = function () { };
-};
+    this.waterLev = 0.8;
 
-window.onload = function () {
+    this.positionx = 0;
+    this.positiony = 0;
+    this.positionz = 0;
+    this.rotationx = 0;
+    this.rotationy = 0;
+    this.rotationz = 0;
+
+    this.pump1 = 0;
+    this.pump2 = 0;
+    this.pump3 = 0;
+
+};
+var obj;//gui控制的物体
+function initDatGui() {
     var options = new Options();
     var gui = new dat.GUI();
 
-    gui.add(options, 'message');
-    gui.add(options, 'speed', -5, 5);
-    gui.add(options, 'displayOutline');
-    gui.add(options, 'button');
+    gui.add(options, 'waterLev', -21, 8).onChange(function (value) {
+        daeModel8.position.z = value;
+    });
+
+    gui.add(options, 'positionx').onChange(function (value) {
+        obj.position.x = value;
+    });
+    gui.add(options, 'positiony').onChange(function (value) {
+        obj.position.y = value;
+    });;
+    gui.add(options, 'positionz').onChange(function (value) {
+        obj.position.z = value;
+    });;
+    gui.add(options, 'rotationx').step(0.01).onChange(function (value) {
+        obj.rotation.x = value;
+    });;
+    gui.add(options, 'rotationy').step(0.01).onChange(function (value) {
+        obj.rotation.y = value;
+    });;
+    gui.add(options, 'rotationz').step(0.01).onChange(function (value) {
+        obj.rotation.z = value;
+
+    });;
+
+
+    gui.add(options, 'pump1', { close: 0, open: 1, fault: 2 });
+    gui.add(options, 'pump2', { close: 0, open: 1, fault: 2 });
+    gui.add(options, 'pump3', { close: 0, open: 1, fault: 2 });
+
 };
 //初始化场景
 function initScene() {
@@ -29,14 +63,18 @@ function initcamera() {
     //camera = new THREE.OrthographicCamera(-D*aspect, D*aspect, D, -D, 1, 1000);
     camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 200000)
     //camera.position.set( 66.58, -16.54, 60.16 );
-    camera.position.set(66.58, 6.54, 60.16);
-    camera.lookAt(new THREE.Vector3(80, 36.7, 0));
+    camera.position.set(60, 30, 48);
+    //camera.lookAt(new THREE.Vector3(80, 36.7, 0));
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
     camera.up.x = 0;
     camera.up.y = 0;
     camera.up.z = 1;
-    //camera.rotation.x = 0.8;
-    //camera.rotation.z = 1 / 6 * Math.PI;
+    camera.rotation.x = 2.62;
+    camera.rotation.y = 2.23;
+    camera.rotation.z = -0.96;
     //camera.rotation.z = 5/6*Math.PI;
+    //camera.rotation.set(0,0,0)
+    obj = camera;
 }
 function initthree() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -177,7 +215,8 @@ function startGame() {
     LoadModel();
     //LoadMax();
     render();
-    initControls();
+    //initControls();
+    initDatGui();
 
 }
 //function changePump(num, state) {
