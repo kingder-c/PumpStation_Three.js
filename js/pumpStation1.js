@@ -172,17 +172,17 @@ function LoadModel() {
         daeModel7.receiveShadow = true;
         daeModel7.castShadow = true;
 
-        //凹凸贴图
-        var texture = THREE.ImageUtils.loadTexture("model/maxdae/images/1_wall.jpg");
-        //geom.computeVertexNormals();
-        var mat = new THREE.MeshPhongMaterial();
-        mat.map = texture;//设置贴图
-        if (bump) {
-            var bump = THREE.ImageUtils.loadTexture("model / maxdae / images / 20140519030228765.jpg");
-            mat.bumpMap = bump;//设置凹凸纹理
-            mat.bumpScale =1;
-        }
-        changeMaterial(daeModel7, mat);
+        ////凹凸贴图
+        //var texture = THREE.ImageUtils.loadTexture("model/maxdae/images/1_wall.jpg");
+        ////geom.computeVertexNormals();
+        //var mat = new THREE.MeshPhongMaterial();
+        //mat.map = texture;//设置贴图
+        //if (bump) {
+        //    var bump = THREE.ImageUtils.loadTexture("model / maxdae / images / 20140519030228765.jpg");
+        //    mat.bumpMap = bump;//设置凹凸纹理
+        //    mat.bumpScale =1;
+        //}
+        //changeMaterial(daeModel7, mat);
         
         scene.add(daeModel7);
     },
