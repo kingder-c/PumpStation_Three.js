@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\js"
+    "\\js",
+    "\\js\\dat.gui",
+    "\\material",
+    "\\model",
+    "\\model\\maxdae",
+    "\\model\\maxdae\\images"
   ],
-  "SelectedNode": "\\pumpStation1.html",
+  "SelectedNode": "\\model\\maxdae\\images\\0_water.jpg",
   "PreviewInSolutionExplorer": false
 }
