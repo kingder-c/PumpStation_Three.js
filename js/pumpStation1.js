@@ -11,9 +11,9 @@ var Options = function () {
     this.rotationy = 0;
     this.rotationz = 0;
 
-    this.pump1 = 0;
-    this.pump2 = 0;
-    this.pump3 = 0;
+    this.pump1 = "";
+    this.pump2 = "";
+    this.pump3 = "";
 
 };
 var obj;//gui控制的物体
@@ -46,9 +46,15 @@ function initDatGui() {
     });;
 
 
-    gui.add(options, 'pump1', { close: 0, open: 1, fault: 2 });
-    gui.add(options, 'pump2', { close: 0, open: 1, fault: 2 });
-    gui.add(options, 'pump3', { close: 0, open: 1, fault: 2 });
+    gui.add(options, 'pump1', ['close', 'open', 'fault']).onChange(function (value) {
+        changePump(1, value);
+    });
+    gui.add(options, 'pump2', ['close', 'open', 'fault']).onChange(function (value) {
+        changePump(2, value);
+    });
+    gui.add(options, 'pump3', ['close', 'open', 'fault']).onChange(function (value) {
+        changePump(3, value);
+    });
 
 };
 //初始化场景
@@ -165,6 +171,18 @@ function LoadModel() {
         //daeModel6.rotation.x = 0.5 * Math.PI;
         daeModel7.receiveShadow = true;
         daeModel7.castShadow = true;
+
+        //凹凸贴图
+        var texture = THREE.ImageUtils.loadTexture("model/maxdae/images/1_wall.jpg");
+        //geom.computeVertexNormals();
+        var mat = new THREE.MeshPhongMaterial();
+        mat.map = texture;//设置贴图
+        if (bump) {
+            var bump = THREE.ImageUtils.loadTexture("model / maxdae / images / 20140519030228765.jpg");
+            mat.bumpMap = bump;//设置凹凸纹理
+            mat.bumpScale =1;
+        }
+        changeMaterial(daeModel7, mat);
         
         scene.add(daeModel7);
     },
@@ -185,6 +203,7 @@ function LoadModel() {
         function (xhr) {
             console.log((xhr.loaded / xhr.total * 100) + "% loaded");
         });
+
 }
 
 //��ʼ����Ⱦ��
@@ -219,51 +238,62 @@ function startGame() {
     initDatGui();
 
 }
-//function changePump(num, state) {
-//    var pumpModel;
-//    switch (num) {
-//        case 1: pumpModel = daeModel1; break;
-//        case 2: pumpModel = daeModel2; break;
-//        case 3: pumpModel = daeModel3; break;
-//        case 4: pumpModel = daeModel4; break;
-//        case 5: pumpModel = daeModel5; break;
-//        case 6: pumpModel = daeModel6; break;
+function changePump(num, state) {
+    var pumpModel;
+    switch (num) {
+        case 1: pumpModel = daeModel1; break;
+        case 2: pumpModel = daeModel2; break;
+        case 3: pumpModel = daeModel3; break;
+    }
+    switch (state) {
+        case "open": ControlPump.open(pumpModel); break;
+        case "close": ControlPump.close(pumpModel); break;
+        case "fault": ControlPump.fault(pumpModel); break;
+    }
+    //changecolor(pumpModel,state);
 
-//    }
-//    switch (state) {
-//        case "open": ControlPump.open(pumpModel); break;
-//        case "close": ControlPump.close(pumpModel); break;
-//        case "fault": ControlPump.fault(pumpModel); break;
-//    }
-//    //changecolor(pumpModel,state);
-
-//}
-//var ControlPump = {
-//    open: function (model) {
-//        for (var i = 0; i < model.children.length; i++) {
-//            if (model.children[i].material)
-//                model.children[i].material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-//            else
-//                ControlPump.open(model.children[i]);
-//        }
-//    },
-//    close: function (model) {
-//        for (var i = 0; i < model.children.length; i++) {
-//            if (model.children[i].material)
-//                model.children[i].material = new THREE.MeshPhongMaterial({ color: 0x000000 });
-//            else
-//                ControlPump.close(model.children[i]);
-//        }
-//    },
-//    fault: function (model) {
-//        for (var i = 0; i < model.children.length; i++) {
-//            if (model.children[i].material)
-//                model.children[i].material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
-//            else
-//                ControlPump.fault(model.children[i]);
-//        }
-//    }
-//}
+}
+//金属纹理
+var bump = THREE.ImageUtils.loadTexture("model / maxdae / images /PumpP.png");
+var ControlPump = {
+    open: function (model) {
+        for (var i = 0; i < model.children.length; i++) {
+            
+            if (model.children[i].material) {
+                var mat = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+                mat.bumpMap = bump;
+                mat.bumpScale = 1;
+                model.children[i].material = mat;
+            }
+            else
+                ControlPump.open(model.children[i]);
+        }
+    },
+    close: function (model) {
+        for (var i = 0; i < model.children.length; i++) {
+            if (model.children[i].material)
+                model.children[i].material = new THREE.MeshPhongMaterial({ color: 0x000000 });
+            else
+                ControlPump.close(model.children[i]);
+        }
+    },
+    fault: function (model) {
+        for (var i = 0; i < model.children.length; i++) {
+            if (model.children[i].material)
+                model.children[i].material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+            else
+                ControlPump.fault(model.children[i]);
+        }
+    }
+}
+function changeMaterial(model, materialA) {
+    for (var i = 0; i < model.children.length; i++) {
+        if (model.children[i].material)
+            model.children[i].material = materialA;
+        else
+            changeMaterial(model.children[i], materialA);
+    }
+}
 //function LoadMax() {
 //    var onError = function (xhr) { };
 //    THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
